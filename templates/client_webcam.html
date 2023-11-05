@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Webcam Video Stream</title>
+</head>
+<body>
+    <h1>Webcam Video Stream</h1>
+    <img id="video-stream" width="640" height="480">
+    <script>
+        const videoStream = document.getElementById('video-stream');
+
+        // Sử dụng EventSource để lắng nghe dữ liệu từ máy chủ Flask qua SSE.
+        const eventSource = new EventSource("/video_feed");
+
+        eventSource.onmessage = function(event) {
+            // Khi nhận được dữ liệu hình ảnh, cập nhật hình ảnh trên trang web.
+            videoStream.src = "data:image/jpeg;base64," + event.data;
+        };
+    </script>
+</body>
+</html>

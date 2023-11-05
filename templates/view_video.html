@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Viewer</title>
+</head>
+<body>
+    <h1>Video Player</h1>
+    <video controls autoplay>
+        <source src="{{ url_for('view_video') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</body>
+</html>

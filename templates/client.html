@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Prediction</title>
+</head>
+<body>
+    <div class="div-form">
+        <form method="post" action="/upload" enctype="multipart/form-data" id="upload-form">
+            <h3>Upload image:</h3>
+            <center><input class="form-control form-control-lg" name="image-name" type="file" id="image_input" accept=".jpg,.png,.jpeg"></center>
+            <p>(Click to select a file, or drag it here)</p>
+            <br>
+            <br>
+            <center><button class="btn btn-outline-primary btn-block" type="submit" style="width: 90%; padding: 5%;">Predict</button></center>
+        </form>
+    </div>
+
+    <div class="image-result" id="image-result" style="display:none;">
+        <h4>Image Result:</h4>
+        <img src="" alt="Image Result" id="result_image">
+    </div>
+
+    <script>
+        // Lắng nghe sự kiện khi form tải lên hình ảnh được gửi đi
+        document.getElementById("upload-form").addEventListener("submit", function (e) {
+            e.preventDefault(); // Ngăn gửi lại trang
+
+            var formData = new FormData(this);
+
+            // Gửi tệp hình ảnh đến máy chủ
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Lấy đường dẫn hình ảnh từ dữ liệu JSON và hiển thị nó
+                var resultImage = document.getElementById("result_image");
+                var imageResult = data.image_result;
+
+                resultImage.src = imageResult;
+                resultImage.style.width = "500px"
+                resultImage.style.height = "500px"
+                var imageResultDiv = document.getElementById("image-result");
+                imageResultDiv.style.display = "block"; // Hiển thị kết quả sau khi tải lên
+
+            })
+            .catch(error => console.error(error));
+        });
+    </script>
+</body>
+</html>
