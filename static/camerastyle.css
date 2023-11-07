@@ -1,14 +1,20 @@
-/* Thiết lập CSS cơ bản */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 header {
-    background-image: url('/static/images/image.png'); 
+    background-image: url('image.png'); 
     color: rgb(253, 253, 253);
     background-size: cover; 
     text-align: center;
+}
+
+.header-content { 
+    flex: 1; 
+    margin-top: 10px; 
+    background: rgba(0, 0, 0, 0.699);
+    font-size: 100%;    
 }
 
 .logo img {
@@ -121,96 +127,95 @@ nav{
     width: 100%;
 }
 
-/* Thiết lập navigation */
-nav {
-    background-color:rgba(0, 0, 0, 0.5);
+main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.custom-icon {
+    width: 50px;
+    height: 50px;
+}
+.camera {
+    flex: 1;
+    background-image: url('/Website\ -\ Sao\ chΘp/image\ fpt.webp');
+    padding: 20px;
+    box-shadow: 0px 0px 10px #888888;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.camera video {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    margin-bottom: 10px;
+}
+.controls {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.camera button {
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+.camera button#fullscreen-button {
+    background-color: #4caf50;
+}
+
+.gallery {
+    flex: 1;
+    background-color: rgb(184, 198, 191);
+    padding: 20px;
+    box-shadow: 0px 0px 10px #888888;
+}
+
+h2 {
+    margin: 0;
+    margin-bottom: 10px;
+    text-align: center;
+    color:#fff;
+}
+
+#image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+#image-gallery img,
+#image-gallery video {
+    max-width: 100%;
+    max-height: 300px;
+    margin: 10px;
+}
+
+#image-gallery img {
+    max-width: 100%;
+    max-height: 150px;
+    margin: 5px 0;
+}
+
+footer {
+    background-color: #3498db;
+    color: white;
     text-align: center;
     padding: 10px;
 }
 
-nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-nav li {
-    display: inline;
-    margin-right: 20px;
-}
-
-nav a {
-    text-decoration: none;
-    color: #fff;
-}
-
-.header-content {
-    flex: 1; 
-    margin-top: 10px; 
-    background: rgba(0, 0, 0, 0.699);
-    font-size: 100%;    
-}
-
-main {
-    background-image: url('/static/images/image fpt.webp'); 
-    background-size: cover; 
-    background-repeat: no-repeat; 
-    padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    flex: 1; 
-    text-align: center;
-
-}
-
-.big-section {
-    background: rgba(0,0,0,0.5);
-    padding: 20px; 
-    border: None;
-    margin: 10px; 
-}
-
-section {
-    background-color: transparent;
-    border: None;
-    flex: 1;
-}
-
-.image{
-    height:80%;
-    width:80%;  
-}
-
-.image2{
-    height:100%;
-    width:100%;
-}
-
-.image-container {
-    display: grid; 
-    grid-template-columns: 1fr 1fr 1fr; 
-    gap: 100px; 
-  }
 
 
-.image-container img {
-    max-width: 100%; 
-}
 
-h2{
-    color:#fff;
-    font-size:180%;
-}
- 
-footer{
-    background-color: #3CB371; 
-    color: #fbf9f9;
-    padding: 20px;
-}
-
-/* Tùy chỉnh CSS cho thiết bị di động */
-@media screen and (max-width: 768px) {
-    main {
-        flex-direction: column;
-    }
-}

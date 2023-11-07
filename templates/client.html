@@ -4,49 +4,114 @@
     <title>Image Prediction</title>
 </head>
 <body>
+    <style>
+    body {
+        background-image: linear-gradient(102.7deg, rgb(253, 218, 255) 8.2%, rgb(223, 173, 252) 19.6%, rgb(173, 205, 252) 36.8%, rgb(173, 252, 244) 73.2%, rgb(202, 248, 208) 90.9%);
+        background-size: cover;
+        background-repeat: no-repeat; 
+        background-attachment: fixed; 
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    .div-form {
+        text-align: center;
+        margin-top: 20px;
+        padding-top : 200px;
+    }
+    h3 {
+        font-size: 20px;
+        color : yellow;
+    }
+    .container{
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+      
+      .file-drop-area {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 350px;
+        max-width: 100%;
+        padding: 25px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 10px 20px rgba(0,0,0,.1);
+        transition: .3s;
+      }
+      .file-drop-area.is-active {
+        background-color: #1a1a1a;
+      }
+    #image_input {
+        width: 100%;
+        padding: 10px;
+    }
+    .btn {
+        padding: 10px 20px;
+        font-size: 18px;
+    }
+    .image-result {
+        text-align: center;
+        margin-top: 20px;
+    }
+    h4 {
+        font-size: 24px;
+    }
+    #result_image {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+
     <div class="div-form">
         <form method="post" action="/upload" enctype="multipart/form-data" id="upload-form">
-            <h3>Upload image:</h3>
-            <center><input class="form-control form-control-lg" name="image-name" type="file" id="image_input" accept=".jpg,.png,.jpeg"></center>
-            <p>(Click to select a file, or drag it here)</p>
-            <br>
-            <br>
-            <center><button class="btn btn-outline-primary btn-block" type="submit" style="width: 90%; padding: 5%;">Predict</button></center>
+            <h3 style= "color: darkblue;"> <big>UPLOAD IMAGE<big></h3>
+            <div class="container">
+                <div class="file-drop-area">
+                    <center><input class="form-control form-control-lg" name="image-name" type="file" id="image_input" accept=".jpg,.png,.jpeg"></center>
+                </div>
+            </div>
+            <center><button class="btn btn-outline-primary" type="submit" style="margin-top: 20px;">Predict</button></center>
         </form>
     </div>
 
-    <div class="image-result" id="image-result" style="display:none;">
-        <h4>Image Result:</h4>
-        <img src="" alt="Image Result" id="result_image">
-    </div>
+<div class="image-result" id="image-result" style="display:none;">
+    <h4>Image Result:</h4>
+    <img src="" alt="Image Result" id="result_image">
+</div>
+</div>
+<script>
+    // Lắng nghe sự kiện khi form tải lên hình ảnh được gửi đi
+    document.getElementById("upload-form").addEventListener("submit", function (e) {
+        e.preventDefault(); // Ngăn gửi lại trang
 
-    <script>
-        // Lắng nghe sự kiện khi form tải lên hình ảnh được gửi đi
-        document.getElementById("upload-form").addEventListener("submit", function (e) {
-            e.preventDefault(); // Ngăn gửi lại trang
+        var formData = new FormData(this);
 
-            var formData = new FormData(this);
+        // Gửi tệp hình ảnh đến máy chủ
+        fetch('/upload', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Lấy đường dẫn hình ảnh từ dữ liệu JSON và hiển thị nó
+            var resultImage = document.getElementById("result_image");
+            var imageResult = data.image_result;
 
-            // Gửi tệp hình ảnh đến máy chủ
-            fetch('/upload', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Lấy đường dẫn hình ảnh từ dữ liệu JSON và hiển thị nó
-                var resultImage = document.getElementById("result_image");
-                var imageResult = data.image_result;
+            resultImage.src = imageResult;
+            resultImage.style.width = "500px"
+            resultImage.style.height = "500px"
+            var imageResultDiv = document.getElementById("image-result");
+            imageResultDiv.style.display = "block"; // Hiển thị kết quả sau khi tải lên
 
-                resultImage.src = imageResult;
-                resultImage.style.width = "500px"
-                resultImage.style.height = "500px"
-                var imageResultDiv = document.getElementById("image-result");
-                imageResultDiv.style.display = "block"; // Hiển thị kết quả sau khi tải lên
-
-            })
-            .catch(error => console.error(error));
-        });
-    </script>
+        })
+        .catch(error => console.error(error));
+    });
+</script>
 </body>
 </html>

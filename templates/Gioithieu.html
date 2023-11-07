@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới thiệu sản phẩm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('/static/images/image fpt.webp');
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-image: url('/static/images/image.png'); 
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        .container_1 {
+            max-width: 200%;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: rgba(0,0,0,0.75);
+            box-shadow: 0 0 10px #fff;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        h1,p, li, a {
+            color: #fff; 
+        }
+        h2 {
+            color: rgb(26, 157, 92);
+        }
+        .logo_3 img {
+             max-width: 25%; 
+             height: auto;
+             padding-right: 85%;
+        }
+        .logo_4 img{
+            max-width: 9%;
+            padding-top: 2%;
+        }
+
+        #header_2{
+            background-color: rgba(0, 0, 0, 0.699);
+            justify-content: space-between; 
+            align-items: center; 
+        }
+
+        #main-menu{
+            display: flex;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+
+        }
+
+        #main-menu li{
+            position: relative;
+        }
+
+        #main-menu li a{
+            color: #f8f8f8;
+            display: block;
+            padding: 18px 20px;
+            text-decoration: none;
+        }
+
+        #main-menu ul.sub-menu{
+            position: absolute;
+            background-color:#131921;
+            padding: 15px 0px;
+            list-style: none;
+            width: 200px;
+            border: 1px solid #434343;
+            display: none;
+            left: 50%;
+        }
+
+        #main-menu li:hover>ul.sub-menu{
+            display: block;
+        }
+
+
+        #main-menu ul.sub-menu a{
+            padding: 8px 15px;
+            border-bottom: 1px solid #434343;
+            left: 0;
+        }
+
+        #main-menu{
+            display: flex;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+
+        }
+
+        #main-menu li{
+            position: relative;
+        }
+
+        #main-menu li a{
+            color: #f8f8f8;
+            display: block;
+            padding: 18px 20px;
+            text-decoration: none;
+        }
+
+        #main-menu ul.sub-menu{
+            position: absolute;
+            background-color:#131921;
+            padding: 15px 0px;
+            list-style: none;
+            width: 200px;
+            border: 1px solid #434343;
+            display: none;
+            left: 50%;
+        }
+
+        #main-menu li:hover>ul.sub-menu{
+            display: block;
+        }
+
+
+        #main-menu ul.sub-menu a{
+            padding: 8px 15px;
+            border-bottom: 1px solid #434343;
+            left: 0;
+        }   
+
+        #main-menu ul.sub-menu li:hover>a{
+            border-bottom: 1px solid #5f5f5f;
+        }
+
+        #main-menu ul.sub-menu li:last-child a{
+            border: none;
+        }
+
+        #main-menu>li>a{
+            position: relative;
+        }
+
+        #main-menu>li>a::before{
+            content: "";
+            height: 4px;
+            width: 0px;
+            background: red;
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            transition: 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+        }
+
+        #main-menu>li:hover>a::before{
+            width: 100%;    
+        }
+
+        #logo{
+            padding: 5px 0px;
+            padding-left: 0%;
+        }
+
+        #logo-img{
+            max-width: 50px;
+            height: auto;
+        }
+
+        nav{
+            display: flex;
+            justify-content: center;
+            justify-items: center;
+            padding: 0;
+        }
+
+        #header{
+            background-color: rgba(0, 0, 0, 0.699);
+            justify-content: space-between; 
+            align-items: center;   
+        }
+
+        #container{
+            max-width: 1000%;
+            margin: 0px auto;
+            margin-bottom: -2%; 
+        }
+
+        h3 {
+            margin-top: 10px;
+            background: rgba(0, 0, 0, 0.699);
+            font-size: 170%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo_4">    
+            <img src="{{ url_for('static', filename='images/logo web-modified.png') }}" alt="Logo">
+        </div>
+        <h3>SỔ TAY SINH VIÊN ĐIỆN TỬ</h3>
+        <div>
+            <div id="header_2">
+                <nav class="container">
+                    <a href="" id="logo">
+                        <img src="{{ url_for('static', filename='images/plants-clipart-logo-4.png') }}" alt="ảnh logo" id="logo-img">
+                    </a>
+                    <ul id="main-menu">
+                      <li><a href="http://127.0.0.1:5500">Home</a></li>
+                      <li><a href="http://127.0.0.1:5500/Gioithieu">Introduction</a></li>
+                      <li><a href="">Feature</a>
+                        <ul class="sub-menu">
+                            <li><a href="Cam.html">CAMERA</a></li>
+                            <li><a href="http://127.0.0.1:5500/video">UPLOAD VIDEO</a></li>
+                            <li><a href="http://127.0.0.1:5500/upload_img">UPLOAD IMAGE</a></li>
+                            <li><a href= "http://127.0.0.1:5500/webcam">CAMERA DETECTION</a></li>
+                        </ul>
+                      </li>
+                      <li><a href="">Contact</a>
+                            <ul class="sub-menu">
+                            <li><a href="">0918193133</a></li>  
+                      </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div class="container_1">
+        <h2>Giới thiệu sản phẩm:</h2>
+        <p> Cùng với sự phát triển của trí tuệ nhân tạo hiện nay, Chúng ta đã bước chân vào thời đại mới, thời đại của kiến thức, học hành và khám phá.
+            Để theo kịp cuộc đua của sự học, Lưu giữ những chặng đường của hành trình này, chúng tôi tự hào giới thiệu Sổ Tay Sinh Viên Điện Tử 
+            Một người bạn đồng hành trung thành trong suốt hành trình của bạn tại trường đại học. 
+        </p>
+        <ul>
+            <h2>Tính năng của sản phẩm:</h2>
+            <li>Tính năng 1: Nhận diện các loại cây trong khuôn viên trường đại học FPT Quy Nhơn thông qua việc chụp ảnh và quay video.</li><br>
+            <li>Tính năng 2: Nhận diện các kiến trúc của đại học FPT Quy Nhơn như kí túc xá, trường đại học, căn tin.</li>
+        </ul>
+        <h2>Thông tin liên hệ:</h2>
+        <p>Nếu bạn cần thêm thông tin về sản phẩm hoặc có câu hỏi, vui lòng liên hệ chúng tôi theo địa chỉ email: <a href="hathenhanfpt@gmail.com">hathenhanfpt@gmail.com</a></p>
+        <h2>Thành viên:</h2>
+        <li>Hà Thế Nhân</li><br>
+        <li>Lê Minh Hoàng</li><br>
+        <li>Nguyễn Quốc Anh</li><br>
+        <li>Huỳnh Tấn Tài</li><br>
+        <li>Bùi Như Kiệt</li><br>
+        <li>Ngô Đình Luân</li><br>
+        <li>Châu Chí Bảo</li><br>
+        <li>Trịnh Hiếu</li>
+    </div>
+</body>
+</html>

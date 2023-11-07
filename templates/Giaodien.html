@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Electronic student handbook</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo_1">
+            <img src="{{ url_for('static', filename='images/logo web-modified.png') }}" alt="Logo">
+        </div>
+        <div class="header-content">
+            <h1>SỔ TAY SINH VIÊN ĐIỆN TỬ</h1>
+        </div>
+        <div>
+            <div id="header">
+                <nav class="container">
+                    <a href="" id="logo">
+                        <img src="{{ url_for('static', filename='images/plants-clipart-logo-4.png') }}" alt="ảnh logo" id="logo-img">
+                   </a>
+                    <ul id="main-menu">
+                      <li><a href="http://127.0.0.1:5500">Home</a></li>
+                      <li><a href="http://127.0.0.1:5500/Gioithieu">Introduction</a></li>
+                      <li><a href="">Feature</a>
+                            <ul class="sub-menu">
+                            <li><a href="Cam.html">CAMERA</a></li>
+                            <li><a href="http://127.0.0.1:5500/video">UPLOAD VIDEO</a></li>
+                            <li><a href="http://127.0.0.1:5500/upload_img">UPLOAD IMAGE</a></li>
+                            <li><a href= "http://127.0.0.1:5500/webcam">CAMERA DETECTION</a></li>
+                        </ul>   
+                      </li>
+                      <li><a href="">Contact</a>
+                            <ul class="sub-menu">
+                            <li><a href="">0918193133</a></li>      
+                      </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="big-section">
+            <section>
+                <h2>Plant</h2>
+                <div class="image-container">
+                    <img class="image2" src="{{ url_for('static', filename='images/image-modified.png') }}">
+                    <img class="image2" src="{{ url_for('static', filename='images/thualahep.png') }}">
+                    <img class="image2" src="{{ url_for('static', filename='images/Trang Son-modified.png') }}">
+                </div>
+            </section>
+            <section>           
+                <h2>Infrastructure</h2>
+                <div class="image-container">
+                    <img class="image2" src="{{ url_for('static', filename='images/fpt_ktx-view-01a-modified2.png') }}">
+                    <img class="image2" src="{{ url_for('static', filename='images/fpt-modified2.png') }}">
+                    <img class "image2" src="{{ url_for('static', filename='images/truong-modified.png') }}">
+                </div>
+            </section>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Sản Phẩm A302</p>
+    </footer>
+</body>
+</html>

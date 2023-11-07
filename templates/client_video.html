@@ -2,12 +2,65 @@
 <html>
 <head>
     <title style="background-color: green;">Video Upload</title>
+    <style>
+        body {
+            background-image: linear-gradient(102.7deg, rgb(253, 218, 255) 8.2%, rgb(223, 173, 252) 19.6%, rgb(173, 205, 252) 36.8%, rgb(173, 252, 244) 73.2%, rgb(202, 248, 208) 90.9%);
+            background-size: cover; 
+            background-repeat: no-repeat; 
+            background-attachment: fixed; 
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .div-form {
+            text-align: center;
+            margin-top: 20px;
+            padding-top : 200px;
+        }
+        h3 {
+            font-size: 20px;
+            color : yellow;
+        }
+        .container{
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+          }
+          
+          .file-drop-area {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 350px;
+            max-width: 100%;
+            padding: 25px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,.1);
+            transition: .3s;
+          }
+          .file-drop-area.is-active {
+            background-color: #1a1a1a;
+          }   
+          
+    </style>
 </head>
 <body>
-    <form action="/video" method="post" enctype="multipart/form-data">
-        <input type="file" name="video">
-        <input  type="submit" value="Upload and Process">
-    </form>
-    <video id="video" controls autoplay></video>
+    <div class="div-form">
+        <form method="post" action="/video" enctype="multipart/form-data" id="upload-form">
+            <h3 style="color: darkblue;">UPLOAD VIDEO</h3>
+            <div class="container">
+            <div class="file-drop-area">
+            <form action="/video" method="post" enctype="multipart/form-data">
+            <input type="file" name="video">
+        </div>
+    </div>
+    <div>
+        <input type="submit" value="Upload and Process">
+    </div>
+        </form>
 </body>
 </html>
