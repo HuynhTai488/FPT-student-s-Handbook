@@ -1,117 +1,360 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Image Prediction</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới thiệu sản phẩm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('/static/images/image fpt.webp');
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-image: url('/static/images/image.png'); 
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        .container_1 {
+            max-width: 200%;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: rgba(0,0,0,0.75);
+            box-shadow: 0 0 10px #fff;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        h1,p, li, a {
+            color: #fff; 
+        }
+        h2 {
+            color: rgb(26, 157, 92);
+        }
+        .logo_3 img {
+             max-width: 25%; 
+             height: auto;
+             padding-right: 85%;
+        }
+        .logo_4 img{
+            max-width: 9%;
+            padding-top: 2%;
+        }
+
+        #header_2{
+            background-color: rgba(0, 0, 0, 0.699);
+            justify-content: space-between; 
+            align-items: center; 
+        }
+
+        #main-menu{
+            display: flex;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+
+        }
+
+        #main-menu li{
+            position: relative;
+        }
+
+        #main-menu li a{
+            color: #f8f8f8;
+            display: block;
+            padding: 18px 20px;
+            text-decoration: none;
+        }
+
+        #main-menu ul.sub-menu{
+            position: absolute;
+            background-color:#131921;
+            padding: 15px 0px;
+            list-style: none;
+            width: 200px;
+            border: 1px solid #434343;
+            display: none;
+            left: 50%;
+        }
+
+        #main-menu li:hover>ul.sub-menu{
+            display: block;
+        }
+
+
+        #main-menu ul.sub-menu a{
+            padding: 8px 15px;
+            border-bottom: 1px solid #434343;
+            left: 0;
+        }
+
+        #main-menu{
+            display: flex;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+
+        }
+
+        #main-menu li{
+            position: relative;
+        }
+
+        #main-menu li a{
+            color: #f8f8f8;
+            display: block;
+            padding: 18px 20px;
+            text-decoration: none;
+        }
+
+        #main-menu ul.sub-menu{
+            position: absolute;
+            background-color:#131921;
+            padding: 15px 0px;
+            list-style: none;
+            width: 200px;
+            border: 1px solid #434343;
+            display: none;
+            left: 50%;
+        }
+
+        #main-menu li:hover>ul.sub-menu{
+            display: block;
+        }
+
+
+        #main-menu ul.sub-menu a{
+            padding: 8px 15px;
+            border-bottom: 1px solid #434343;
+            left: 0;
+        }   
+
+        #main-menu ul.sub-menu li:hover>a{
+            border-bottom: 1px solid #5f5f5f;
+        }
+
+        #main-menu ul.sub-menu li:last-child a{
+            border: none;
+        }
+
+        #main-menu>li>a{
+            position: relative;
+        }
+
+        #main-menu>li>a::before{
+            content: "";
+            height: 4px;
+            width: 0px;
+            background: red;
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            transition: 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+        }
+
+        #main-menu>li:hover>a::before{
+            width: 100%;    
+        }
+
+        #logo{
+            padding: 5px 0px;
+            padding-left: 0%;
+        }
+
+        #logo-img{
+            max-width: 50px;
+            height: auto;
+        }
+
+        nav{
+            display: flex;
+            justify-content: center;
+            justify-items: center;
+            padding: 0;
+        }
+
+        #header{
+            background-color: rgba(0, 0, 0, 0.699);
+            justify-content: space-between; 
+            align-items: center;   
+        }
+
+        #container{
+            max-width: 1000%;
+            margin: 0px auto;
+            margin-bottom: -2%; 
+        }
+
+        h3 {
+            margin-top: 10px;
+            font-size: 170%;
+        }
+
+        .div-form {
+            text-align: center;
+            margin-top: 20px;
+            padding-top : 20px;
+            padding-bottom: 200px;
+        }
+        .container{
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+          
+        .file-drop-area {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 350px;
+            max-width: 100%;
+            padding: 25px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,.1);
+            transition: .3s;
+        }
+        .file-drop-area.is-active {
+            background-color: #1a1a1a;
+        }  
+        #submit-btn{
+            margin-top: 45px;
+            height: 60px;
+            width: 13%;
+            border-radius: 21px;
+            background: green;
+            color: white;
+        }
+        #image_input {
+            width: 100%;
+            padding: 10px;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 18px;
+        }
+        .image-result {
+            text-align: center;
+            margin-top: 20px;
+        }
+        h4 {
+            font-size: 24px;
+        }
+        #result_image {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
-    <style>
-    body {
-        background-image: linear-gradient(102.7deg, rgb(253, 218, 255) 8.2%, rgb(223, 173, 252) 19.6%, rgb(173, 205, 252) 36.8%, rgb(173, 252, 244) 73.2%, rgb(202, 248, 208) 90.9%);
-        background-size: cover;
-        background-repeat: no-repeat; 
-        background-attachment: fixed; 
-        font-family: Arial, sans-serif;
-        text-align: center;
-    }
-    .div-form {
-        text-align: center;
-        margin-top: 20px;
-        padding-top : 200px;
-    }
-    h3 {
-        font-size: 20px;
-        color : yellow;
-    }
-    .container{
-        height: 100%;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-      }
-      
-      .file-drop-area {
-        position: relative;
-        display: flex;
-        align-items: center;
-        width: 350px;
-        max-width: 100%;
-        padding: 25px;
-        background-color: #fff;
-        border-radius: 12px;
-        box-shadow: 0 10px 20px rgba(0,0,0,.1);
-        transition: .3s;
-      }
-      .file-drop-area.is-active {
-        background-color: #1a1a1a;
-      }
-    #image_input {
-        width: 100%;
-        padding: 10px;
-    }
-    .btn {
-        padding: 10px 20px;
-        font-size: 18px;
-    }
-    .image-result {
-        text-align: center;
-        margin-top: 20px;
-    }
-    h4 {
-        font-size: 24px;
-    }
-    #result_image {
-        max-width: 100%;
-        height: auto;
-    }
-</style>
-
-    <div class="div-form">
-        <form method="post" action="/upload" enctype="multipart/form-data" id="upload-form">
-            <h3 style= "color: darkblue;"> <big>UPLOAD IMAGE<big></h3>
-            <div class="container">
-                <div class="file-drop-area">
-                    <center><input class="form-control form-control-lg" name="image-name" type="file" id="image_input" accept=".jpg,.png,.jpeg"></center>
-                </div>
+    <header>
+        <div class="logo_4">    
+            <img src="{{ url_for('static', filename='images/logo web-modified.png') }}" alt="Logo">
+        </div>
+        <h3>SỔ TAY SINH VIÊN ĐIỆN TỬ</h3>
+        <div>
+            <div id="header_2">
+                <nav class="container">
+                    <a href="" id="logo">
+                        <img src="{{ url_for('static', filename='images/plants-clipart-logo-4.png') }}" alt="ảnh logo" id="logo-img">
+                    </a>
+                    <ul id="main-menu">
+                      <li><a href="http://127.0.0.1:5500">Home</a></li>
+                      <li><a href="http://127.0.0.1:5500/Gioithieu">Introduction</a></li>
+                            <li><a href="">Feature</a>
+                                  <ul class="sub-menu">
+                                  <li><a href="http://127.0.0.1:5500/camera">CAMERA</a></li>
+                                  <li><a href="http://127.0.0.1:5500/use_video">USE VIDEO</a></li>
+                                  <li><a href="http://127.0.0.1:5500/video">UPLOAD VIDEO</a></li>
+                                  <li><a href="http://127.0.0.1:5500/upload_img">UPLOAD IMAGE</a></li>
+                                  <li><a href= "http://127.0.0.1:5500/webcam">CAMERA DETECTION</a></li>
+                              </ul>  
+                      </li>
+                      <li><a href="">Contact</a>
+                            <ul class="sub-menu">
+                            <li><a href="">0918193133</a></li>  
+                      </li>
+                    </ul>
+                </nav>
             </div>
-            <center><button class="btn btn-outline-primary" type="submit" style="margin-top: 20px;">Predict</button></center>
-        </form>
+        </div>
+    </header>
+    <div class="container_1">
+        <div class="div-form">
+            <form method="post" action="/upload" enctype="multipart/form-data" id="upload-form">
+                <h3 style="color: white">UPLOAD IMAGE</h3>
+                <div class="container">
+                    <div class="file-drop-area">
+                        <input class="form-control form-control-lg" name="image-name" type="file" id="image_input" accept=".jpg,.png,.jpeg">
+                    </div>
+                </div>
+                <div>
+                    <button id="submit-btn" type="submit">Predict</button>
+                </div>
+            </form>
+        </div>
+    
+        <div class="image-result" id="image-result" style="display:none;">
+            <h4 style="color: white;">Image Result:</h4>
+            <img src="" alt="Image Result" id="result_image">
+            <div id="label_script" style="color: white;"></div>
+        </div>
     </div>
+    
+    <script>
+        document.getElementById("upload-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+    
+            var formData = new FormData(this);
+    
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Network response was not ok: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                const resultImage = document.getElementById("result_image");
+                const imageResult = data.image_result;
+    
+                resultImage.src = imageResult;
+                resultImage.style.width = "500px";
+                resultImage.style.height = "500px";
+    
+                var imageResultDiv = document.getElementById("image-result");
+                imageResultDiv.style.display = "block";
+    
+                const labelScripts = data.label_script;
+                const labelScriptElement = document.getElementById("label_script");
+    
+                labelScriptElement.innerHTML = ''; // Clear previous content
+    
+                labelScripts.forEach(item => {
+                    const p = document.createElement('p');
+                    p.textContent = `${item}`;
+                    labelScriptElement.appendChild(p);
+                });
+            })
+            .catch(error => {
+                console.error('An error occurred:', error);
+            });
+        });
+    </script>
+    
+    
+    
+    
 
-<div class="image-result" id="image-result" style="display:none;">
-    <h4>Image Result:</h4>
-    <img src="" alt="Image Result" id="result_image">
-</div>
-</div>
-<script>
-    // Lắng nghe sự kiện khi form tải lên hình ảnh được gửi đi
-    document.getElementById("upload-form").addEventListener("submit", function (e) {
-        e.preventDefault(); // Ngăn gửi lại trang
-
-        var formData = new FormData(this);
-
-        // Gửi tệp hình ảnh đến máy chủ
-        fetch('/upload', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Lấy đường dẫn hình ảnh từ dữ liệu JSON và hiển thị nó
-            var resultImage = document.getElementById("result_image");
-            var imageResult = data.image_result;
-
-            resultImage.src = imageResult;
-            resultImage.style.width = "500px"
-            resultImage.style.height = "500px"
-            var imageResultDiv = document.getElementById("image-result");
-            imageResultDiv.style.display = "block"; // Hiển thị kết quả sau khi tải lên
-
-        })
-        .catch(error => console.error(error));
-    });
-</script>
 </body>
 </html>

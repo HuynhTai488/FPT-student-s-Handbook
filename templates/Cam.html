@@ -4,13 +4,13 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <title>Camera</title>
-    <link rel="stylesheet" type="text/css" href="camerastyle.css">`
+    <link rel="stylesheet" type="text/css" href="/static/camerastyle.css">
 </head>
 
 <body>
     <header>
         <div class="logo_1">
-            <img src="logo web-modified.png" alt="Logo">
+            <img src="{{ url_for('static', filename='images/logo web-modified.png') }}" alt="Logo">
         </div>
         <div class="header-content">
             <h1>SỔ TAY SINH VIÊN ĐIỆN TỬ</h1>
@@ -19,16 +19,19 @@
             <div id="header">
                 <nav class="container">
                     <a href="" id="logo">
-                        <img src="plants-clipart-logo-4.png" alt="ảnh logo" id="logo-img">
+                        <img src="{{ url_for('static', filename='images/plants-clipart-logo-4.png') }}" alt="ảnh logo" id="logo-img">
                     </a>
                     <ul id="main-menu">
-                      <li><a href="Giaodien.html">Home</a></li>
-                      <li><a href="Gioithieu.html">Introduction</a></li>
-                      <li><a href="">Feature</a>
-                            <ul class="sub-menu">
-                            <li><a href="/Camera/Cam.html">Camera</a></li>
-                            <li><a href="">Upload File</a></li>
-                        </ul>
+                        <li><a href="http://127.0.0.1:5500">Home</a></li>
+                        <li><a href="http://127.0.0.1:5500/Gioithieu">Introduction</a></li>
+                        <li><a href="">Feature</a>
+                              <ul class="sub-menu">
+                              <li><a href="http://127.0.0.1:5500/camera">CAMERA</a></li>
+                              <li><a href="http://127.0.0.1:5500/use_video">USE VIDEO</a></li>
+                              <li><a href="http://127.0.0.1:5500/video">UPLOAD VIDEO</a></li>
+                              <li><a href="http://127.0.0.1:5500/upload_img">UPLOAD IMAGE</a></li>
+                              <li><a href= "http://127.0.0.1:5500/webcam">CAMERA DETECTION</a></li>
+                          </ul>  
                       </li>
                       <li><a href="">Contact</a>
                             <ul class="sub-menu">
@@ -56,6 +59,6 @@
         <div id="image-gallery">
         </div>
     </div>
-    <script src="style.js"></script>
+    <script src="/static/style.js"></script>
 </body>
 </html>

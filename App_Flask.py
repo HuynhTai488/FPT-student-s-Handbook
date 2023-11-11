@@ -25,8 +25,13 @@ classNames = class_names = [''] + ['Cây Bàng Đài Loan','Cây Chiều Tím','
                                 ,'Cây Phong Ba','Cây Thùa Lá Hẹp','Cây Trang Son'
                                 ,'Cây Tuyết Sơn Phi Hồng','Kí Túc Xá', 'Nhà Tập Võ','Nhà Xe','Sân Banh'
                                 ,'Sân Bóng Chuyền - BóngRổ','The Thinker','Trường FPT',]
+#Truy cập script được lưu trong class_data.py
+from class_data import class_data
 
 
+
+
+    
 # color_by_classnames = [
 #     (255, 52, 52), (112, 51, 158), (136, 51, 158), (158, 51, 147), (158, 51, 97), (158, 115, 51)
 #     , (151, 115, 51 ), (133, 158, 51), (112, 158, 51), (72, 158, 51), (51, 158, 76), (51, 158, 97)
@@ -99,15 +104,19 @@ def home():
 def introduce():
     return render_template('Gioithieu.html')
 
+@app.route('/camera', methods=['POST','GET'])
+def camera():
+    return render_template('camera.html')
+
 @app.route('/upload', methods=["POST"])
 def get_output():
     if request.method == 'POST':
         image = request.files['image-name']
-        image.save("./static/tmp.jpg")
-        original_image = cv2.imread("./static/tmp.jpg")
-
+        if '.png'in image.filename or'.jpg' in image.filename: 
+            image.save("./static/tmp.jpg")
+            original_image = cv2.imread("./static/tmp.jpg")
     predictions = model.predict(original_image)
-
+    results=[]
     objects_detected = False
     
     for index, prediction in enumerate(predictions):
@@ -130,19 +139,28 @@ def get_output():
                 font = ImageFont.truetype(font_path, 30)
                 draw.text((x1, y1 - 30), label_vi, fill="lightblue", font=font)
                 original_image = np.array(pil_image)
+                #Lất đoạn script trong class_data với vòng lặp
+                label_script = class_data.get(label_vi)
+                results.append(label_script)
 
     if original_image is not None:
         output_image_path = 'static/tmp.jpg'
         cv2.imwrite(output_image_path, original_image)
+        # Lấy đoạn script từ class_data
     else:
-        output_image_path = None
-    
+            output_image_path = None
+            label_script = "Không có thông tin do không có hình ảnh"
+
     response_data = {
-        'image_result': output_image_path
-    }
+                'image_result': output_image_path,
+                'label_script': results
+            }
     return jsonify(response_data)
+
 # Khởi tạo biến toàn cục để lưu đường dẫn video
 video_path = None
+
+# Tạo thêm 1 render để cho upload img client để no cùng liên kết đến client html, tạo thêm cho client 1 khung để nó dc render ra cái cript
 @app.route("/upload_img", methods=["GET"])
 def upload_page():
     return render_template("client.html")
@@ -157,7 +175,11 @@ def upload_video():
             return Response(generate_frames('./static/video.mp4'), mimetype='multipart/x-mixed-replace; boundary=frame')
     return render_template('client_video.html')
 
+@app.route('/use_video', methods= ['POST','GET'])
+def use_video():
+    return render_template('Cam.html')
 
+#định dạng tốc độ fps trả ra từ 25 frame còn 1 frame, giảm tốc độ fps
 #Webcam
 @app.route('/webcam', methods=['POST','GET'])
 def webcam():

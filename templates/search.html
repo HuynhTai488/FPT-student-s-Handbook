@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tìm kiếm thông tin từ class_name</title>
+    <script>
+        function searchInfo() {
+            var class_name = document.getElementById("class_name").value;
+            var resultContainer = document.getElementById("result_container");
+
+            // Gửi yêu cầu tìm kiếm thông tin từ class_name đến server
+            // Đây là nơi bạn có thể sử dụng AJAX để gửi yêu cầu đến server Flask
+            // Ví dụ sử dụng fetch API:
+
+            fetch(`/search?class_name=${class_name}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Xử lý kết quả trả về
+                    if (data.error) {
+                        resultContainer.innerHTML = `<p>${data.error}</p>`;
+                    } else if (data.link) {
+                        resultContainer.innerHTML = `<a href="${data.link}" target="_blank">${data.link}</a>`;
+                    } else {
+                        resultContainer.innerHTML = "<p>Không tìm thấy thông tin.</p>";
+                    }
+                })
+                .catch(error => {
+                    console.error('Lỗi:', error);
+                    resultContainer.innerHTML = "<p>Có lỗi xảy ra trong quá trình tìm kiếm.</p>";
+                });
+        }
+    </script>
+</head>
+<body>
+    <h1>Tìm kiếm thông tin từ class_name</h1>
+    <input type="text" id="class_name" placeholder="Nhập class_name">
+    <button onclick="searchInfo()">Tìm kiếm</button>    
+    <div id="result_container"></div>
+</body>
+</html>
