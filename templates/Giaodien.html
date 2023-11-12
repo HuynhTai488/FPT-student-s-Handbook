@@ -37,6 +37,42 @@
                     </ul>
                 </nav>
             </div>
+            <label style="background-color: rgb(31, 199, 31);" for="className">Enter Class Name:</label>
+    <input type="text" id="className" name="name">
+    <button id="submitButton" onclick="getRequest()">Get Script</button>
+
+    <div id="result"></div>
+
+    <script >
+        function getRequest() {
+            var className = document.getElementById("className").value;
+            var xhttp = new XMLHttpRequest();
+
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var resultDiv = document.getElementById("result");
+                    resultDiv.innerHTML = "<pre>" + this.responseText + "</pre>";
+                     // Thay đổi màu nền của đoạn script đầu ra
+                     resultDiv.style.backgroundColor = "lightgreen"; // Màu hồng xanh sáng, bạn có thể thay đổi thành màu khác
+                     resultDiv.style.color = "black";
+
+                     // Thay đổi kích thước chữ
+                     resultDiv.style.fontSize = "20px";
+                    // Thực hiện các thay đổi giao diện người dùng dựa trên kết quả nếu cần
+                }
+            };
+
+            xhttp.open("POST", "/get_script", true);
+            xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            var data = "name=" + encodeURIComponent(className);
+            xhttp.send(data);
+              // Thay đổi màu nền và màu chữ của nút button
+              var submitButton = document.getElementById("submitButton");
+            submitButton.style.backgroundColor = "lightgreen"; 
+            submitButton.style.color = "white"; // Thay đổi màu chữ
+        }
+    </script>
         </div>
     </header>
     <main>

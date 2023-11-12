@@ -6,7 +6,6 @@ import base64
 import tensorflow as tf
 from PIL import Image,ImageDraw, ImageFont
 
-from werkzeug.utils import secure_filename
 import numpy as np
 from ultralytics import YOLO
 from PIL import Image
@@ -15,6 +14,7 @@ import os
 from ultralytics import YOLO
 import cv2
 import math
+
 
 app = Flask(__name__, template_folder='templates')
 app.config['SECRET_KEY'] = 'Project Detection'
@@ -28,15 +28,6 @@ classNames = class_names = [''] + ['Cây Bàng Đài Loan','Cây Chiều Tím','
 #Truy cập script được lưu trong class_data.py
 from class_data import class_data
 
-
-
-
-    
-# color_by_classnames = [
-#     (255, 52, 52), (112, 51, 158), (136, 51, 158), (158, 51, 147), (158, 51, 97), (158, 115, 51)
-#     , (151, 115, 51 ), (133, 158, 51), (112, 158, 51), (72, 158, 51), (51, 158, 76), (51, 158, 97)
-#     , (51, 158, 126), (51, 151, 158), (51, 97, 158), (51, 72, 158), (158, 83, 51), (158, 51, 79)
-#     , (154, 51, 158), (90, 51, 158)]
 #CREATE THRESHOLD
 THRESHOLD=0.3
 
@@ -54,13 +45,17 @@ def generate_frames(path_x = ''):
         frame = buffer.tobytes()
         yield (b'--frame\r\n'
                     b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+        
+import time
 def video_detection(path_x):
     video_capture = path_x
     cap = cv2.VideoCapture(video_capture)
     frame_width = int(cap.get(3))
     frame_height = int(cap.get(4))
-
+    target_fps=1
+    time_interval= 1/ target_fps  
     while True:
+        start_time= time.time()
         success, img = cap.read()
         results = model(img, stream=True)
         for r in results:
@@ -88,11 +83,14 @@ def video_detection(path_x):
                 draw = ImageDraw.Draw(pil_image)
                 font_path = ".\\Font_Unicode\\Roboto-Regular.ttf"
                 font = ImageFont.truetype(font_path, 60)
-                draw.text((x1, y1 - 60), label, fill="lightblue", font=font)
+                draw.text((x1, y1 - 60), label, fill="yellow", font=font)
                 img = np.array(pil_image)
 
         yield img
-
+        # Chờ giữa các frame để đạt được số fps mong muốn
+        elapsed_time = time.time() - start_time
+        sleep_time = max(0, time_interval - elapsed_time)
+        time.sleep(sleep_time)
 cv2.destroyAllWindows()
 
 
@@ -100,14 +98,35 @@ cv2.destroyAllWindows()
 def home():
     return render_template('Giaodien.html')
 
+#Page giới thiệu
 @app.route('/Gioithieu', methods=['GET'])
 def introduce():
     return render_template('Gioithieu.html')
 
+#Route camera chụp hình
 @app.route('/camera', methods=['POST','GET'])
 def camera():
     return render_template('camera.html')
 
+#Route tìm kiếm thông tin từ class name
+class Object:
+    def __init__(self, name):
+        self.name = name
+@app.route('/get_script', methods=["POST", "GET"])
+def handle_script_request():
+    if request.method == "POST":
+        name = request.form.get('name')
+        for obj in class_names:
+            if obj == name:
+                label_script = class_data.get(name)
+                return (label_script)
+    elif request.method == "GET":
+        name = request.args.get('name')
+        return render_template("search.html", name=name)
+    return "Đối tượng bạn tìm kiếm không có hoặc hãy nhập lại đối tượng cần tìm kiếm với kí tự như 'Cây Trang Son' "
+
+
+#Route process image
 @app.route('/upload', methods=["POST"])
 def get_output():
     if request.method == 'POST':
@@ -137,7 +156,7 @@ def get_output():
                 draw = ImageDraw.Draw(pil_image)
                 font_path = ".\\Font_Unicode\\Roboto-Regular.ttf"
                 font = ImageFont.truetype(font_path, 30)
-                draw.text((x1, y1 - 30), label_vi, fill="lightblue", font=font)
+                draw.text((x1, y1 - 30), label_vi, fill="yellow", font=font)
                 original_image = np.array(pil_image)
                 #Lất đoạn script trong class_data với vòng lặp
                 label_script = class_data.get(label_vi)
@@ -161,6 +180,7 @@ def get_output():
 video_path = None
 
 # Tạo thêm 1 render để cho upload img client để no cùng liên kết đến client html, tạo thêm cho client 1 khung để nó dc render ra cái cript
+#Route upload image
 @app.route("/upload_img", methods=["GET"])
 def upload_page():
     return render_template("client.html")
@@ -175,6 +195,7 @@ def upload_video():
             return Response(generate_frames('./static/video.mp4'), mimetype='multipart/x-mixed-replace; boundary=frame')
     return render_template('client_video.html')
 
+#Route mở cmaera quay video
 @app.route('/use_video', methods= ['POST','GET'])
 def use_video():
     return render_template('Cam.html')
