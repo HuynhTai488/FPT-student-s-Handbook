@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-TXzSjD86I0q0oLdlKU5OgUpnXoKl4Yxp6L/dpMpCg9L3j6U/iYAp4N34Yj8gA+1" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4 mb-4">News Page</h1>
+
+        <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#addNewsModal">Add News</button>
+
+        <div id="newsContainer">
+            <!-- Thông báo sẽ được hiển thị ở đây -->
+        </div>
+    </div>
+
+    <!-- Modal để thêm thông báo mới -->
+    <div class="modal fade" id="addNewsModal" tabindex="-1" role="dialog" aria-labelledby="addNewsModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addNewsModalLabel">Add News</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addNewsForm">
+                        <div class="form-group">
+                            <label for="newsTitle">Title:</label>
+                            <input type="text" class="form-control" id="newsTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newsContent">Content:</label>
+                            <textarea class="form-control" id="newsContent" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add News</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Giả sử thông báo được lưu trong một mảng
+        var newsData = [
+            {
+                title: 'Thông báo quan trọng',
+                content: 'Hệ thống sẽ được nâng cấp vào ngày mai. Xin vui lòng lưu ý và theo dõi cập nhật.'
+            },
+            {
+                title: 'Sự kiện mới',
+                content: 'Đã mở đăng ký cho sự kiện "Ngày hội Công nghệ". Hãy đăng ký ngay!'
+            },
+            // Thêm các thông báo khác nếu cần
+        ];
+
+        // Hiển thị thông báo
+        var newsContainer = document.getElementById('newsContainer');
+        var addNewsForm = document.getElementById('addNewsForm');
+        var newsTitleInput = document.getElementById('newsTitle');
+        var newsContentInput = document.getElementById('newsContent');
+
+        function displayNews() {
+            newsContainer.innerHTML = ''; // Xóa nội dung hiện tại
+
+            newsData.forEach(function(news, index) {
+                var card = document.createElement('div');
+                card.className = 'card';
+
+                var cardBody = document.createElement('div');
+                cardBody.className = 'card-body';
+
+                var cardTitle = document.createElement('h5');
+                cardTitle.className = 'card-title';
+                cardTitle.textContent = news.title;
+
+                var cardContent = document.createElement('p');
+                cardContent.className = 'card-text';
+                cardContent.textContent = news.content;
+
+                cardBody.appendChild(cardTitle);
+                cardBody.appendChild(cardContent);
+                card.appendChild(cardBody);
+
+                newsContainer.appendChild(card);
+            });
+        }
+
+        // Hiển thị thông báo khi trang được tải
+        displayNews();
+
+        // Xử lý sự kiện khi form thêm thông báo được submit
+        addNewsForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var title = newsTitleInput.value;
+            var content = newsContentInput.value;
+
+            // Thêm thông báo mới vào mảng
+            newsData.push({ title: title, content: content });
+
+            // Hiển thị lại danh sách thông báo
+            displayNews();
+
+            // Đóng modal
+            $('#addNewsModal').modal('hide');
+
+            // Xóa nội dung của form
+            newsTitleInput.value = '';
+            newsContentInput.value = '';
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-sQqPBlkKOlmT7GZfE8rLbJw7qCMKweMmK8HQH6Sr36ps6fDhKQeAdqi9RdWfBAEtF" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyIxOkwx1OEtjUkI9pV7cGq69b3J1Ka6eD" crossorigin="anonymous"></script>
+</body>
+</html>

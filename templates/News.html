@@ -1,9 +1,12 @@
 <!DOCTYPE html>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-TXzSjD86I0q0oLdlKU5OgUpnXoKl4Yxp6L/dpMpCg9L3j6U/iYAp4N34Yj8gA+1" crossorigin="anonymous">
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giới thiệu sản phẩm</title>
+    <title>News Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-TXzSjD86I0q0oLdlKU5OgUpnXoKl4Yxp6L/dpMpCg9L3j6U/iYAp4N34Yj8gA+1" crossorigin="anonymous">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -26,11 +29,8 @@
             border-radius: 5px;
             margin-top: 10px;
         }
-        h1,p, li, a {
+        p, li, a {
             color: #fff; 
-        }
-        h2 {
-            color: rgb(26, 157, 92);
         }
         .logo_3 img {
              max-width: 25%; 
@@ -188,22 +188,11 @@
             margin: 0px auto;
             margin-bottom: -2%; 
         }
-
-        h3 {
-            margin-top: 10px;
-            background: rgba(0, 0, 0, 0.699);
-            font-size: 170%;
-        }
-        
         .div-form {
             text-align: center;
             margin-top: 20px;
             padding-top : 20px;
             padding-bottom: 200px;
-        }
-        h3 {
-            font-size: 20px;
-            color : yellow;
         }
         .container{
             height: 100%;
@@ -212,9 +201,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-          }
+        }
           
-          .file-drop-area {
+        .file-drop-area {
             position: relative;
             display: flex;
             align-items: center;
@@ -225,27 +214,65 @@
             border-radius: 12px;
             box-shadow: 0 10px 20px rgba(0,0,0,.1);
             transition: .3s;
-          }
-          .file-drop-area.is-active {
+        }
+        .file-drop-area.is-active {
             background-color: #1a1a1a;
-          }  
-          #submit-btn{
+        }  
+        #submit-btn{
             margin-top: 45px;
             height: 60px;
             width: 13%;
             border-radius: 21px;
             background: green;
             color: white;
-          }
+        }
+        #image_input {
+            width: 100%;
+            padding: 10px;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 18px;
+        }
+        .image-result {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #result_image {
+            max-width: 100%;
+            height: auto;
+        }
+        .mt-4 {
+            color: white;
+            font-size: 50px;
+        }
+        .important-announcement .card-title {
+            color: yellow;
+            font-size: 20px;
+        }
+        .important-announcement .card-text {
+            color: "white";
+            font-size: 20px;
+        }
+        .new-event .card-title {
+            color: yellow;
+            font-size: 20px;
+        }
+        .new-event .card-text {
+            color: "white";
+            font-size: 20px;
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="logo_4">    
-            <img src="{{ url_for('static', filename='images/logo web-modified.png') }}" alt="Logo">>
-            <div class="header-content">
-                <h1 style="background-color: #131921;">SỔ TAY SINH VIÊN ĐIỆN TỬ</h1>
-            </div>
+            <img src="{{ url_for('static', filename='images/logo web-modified.png') }}" alt="Logo">
+        </div>
+        <div class="header-content">
+            <h1 style="background-color: #131921;">SỔ TAY SINH VIÊN ĐIỆN TỬ</h1>
+        </div>
+        <div>
             <div id="header_2">
                 <nav class="container">
                     <a href="" id="logo">
@@ -262,34 +289,70 @@
                                 <li><a href="http://127.0.0.1:5500/video">UPLOAD VIDEO</a></li>
                                 <li><a href="http://127.0.0.1:5500/upload_img">UPLOAD IMAGE</a></li>
                                 <li><a href= "http://127.0.0.1:5500/webcam">CAMERA DETECTION</a></li>
-                            </ul>      
+                            </ul>   
                         </li>
                         <li><a href="">Contact</a>
                               <ul class="sub-menu">
                               <li><a href="">0918193133</a></li>      
                         </li>
-                      </ul>
-                </nav>
+                </nav>  
             </div>
         </div>
     </header>
     <div class="container_1">
-        <div class="div-form">
-            <form method="post" action="/video" enctype="multipart/form-data" id="upload-form">
-                <h2 style="color: white;">UPLOAD VIDEO</h3>
-                <div class="container">
-                <div class="file-drop-area">
-                <form action="/video" method="post" enctype="multipart/form-data">
-                <input type="file" name="video">
-            </div>
-        </div>
-        <div>
-            <input id="submit-btn" type="submit" value="Upload and Process">
-        </div>
-            </form>
+        <h1 class="mt-4">FPT News</h1>
 
-            <h1 style="color: red;" hidden >test</h1>
-            <h2 style="color: red;" hidden>test2</h2>
+        <div id="newsContainer">
+            <!-- Thông báo sẽ được hiển thị ở đây -->
+        </div>
     </div>
+
+
+
+
+    <script>
+        // Giả sử thông báo được lưu trong một mảng
+        var newsData = [
+            {
+                title: 'Thông báo quan trọng',
+                content: 'Hệ thống sẽ được nâng cấp vào ngày mai. Xin vui lòng lưu ý và theo dõi cập nhật.'
+            },
+            {
+                title: 'Sự kiện mới',
+                content: 'Đã mở đăng ký cho sự kiện "Ngày hội Công nghệ". Hãy đăng ký ngay!'
+            },
+            // Thêm các thông báo khác nếu cần
+        ];
+
+        // Hiển thị thông báo
+        var newsContainer = document.getElementById('newsContainer');
+
+        newsData.forEach(function(news, index) {
+            var card = document.createElement('div');
+            card.className = 'card';
+            if (index == 0) {
+                card.classList.add('important-announcement');
+            } else if (index == 1) {
+                card.classList.add('new-event');
+            }
+
+            var cardBody = document.createElement('div');
+            cardBody.className = 'card-body';
+
+            var cardTitle = document.createElement('h5');
+            cardTitle.className = 'card-title';
+            cardTitle.textContent = news.title;
+
+            var cardContent = document.createElement('p');
+            cardContent.className = 'card-text';
+            cardContent.textContent = news.content;
+
+            cardBody.appendChild(cardTitle);
+            cardBody.appendChild(cardContent);
+            card.appendChild(cardBody);
+
+            newsContainer.appendChild(card);
+        });
+    </script>
 </body>
 </html>

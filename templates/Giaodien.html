@@ -21,10 +21,11 @@
                     <ul id="main-menu">
                       <li><a href="http://127.0.0.1:5500">Home</a></li>
                       <li><a href="http://127.0.0.1:5500/Gioithieu">Introduction</a></li>
+                      <li><a href="http://127.0.0.1:5500/News">News</a></li>
+                      <li><a href="http://127.0.0.1:5500/history">Information</a></li>
                       <li><a href="">Feature</a>
                             <ul class="sub-menu">
-                            <li><a href="http://127.0.0.1:5500/camera">CAMERA</a></li>
-                            <li><a href="http://127.0.0.1:5500/use_video">USE VIDEO</a></li>
+                            <li><a href="http://127.0.0.1:5500/use_video">CAMERA</a></li>
                             <li><a href="http://127.0.0.1:5500/video">UPLOAD VIDEO</a></li>
                             <li><a href="http://127.0.0.1:5500/upload_img">UPLOAD IMAGE</a></li>
                             <li><a href= "http://127.0.0.1:5500/webcam">CAMERA DETECTION</a></li>
@@ -37,42 +38,56 @@
                     </ul>
                 </nav>
             </div>
-            <label style="background-color: rgb(31, 199, 31);" for="className">Enter Class Name:</label>
-    <input type="text" id="className" name="name">
-    <button id="submitButton" onclick="getRequest()">Get Script</button>
+                <label style="background-color: rgb(31, 199, 31);" for="className">Enter Class Name:</label>
+        <input type="text" id="className" name="name">
+        <button id="submitButton" onclick="getRequest()">Get Script</button>
 
-    <div id="result"></div>
+        <div id="result"></div>
+        <img id="outputImage" style="display: none;" alt="Output Image">
+        <script >
+            function getRequest() {
+                var className = document.getElementById("className").value;
+                var xhttp = new XMLHttpRequest();
 
-    <script >
-        function getRequest() {
-            var className = document.getElementById("className").value;
-            var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var resultDiv = document.getElementById("result");
+                        resultDiv.innerHTML = "<pre>" + this.responseText + "</pre>";
+                        // Thay đổi màu nền của đoạn script đầu ra
+                        resultDiv.style.backgroundColor = "black"; // Màu hồng xanh sáng, bạn có thể thay đổi thành màu khác
+                        resultDiv.style.color = "white";
 
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    var resultDiv = document.getElementById("result");
-                    resultDiv.innerHTML = "<pre>" + this.responseText + "</pre>";
-                     // Thay đổi màu nền của đoạn script đầu ra
-                     resultDiv.style.backgroundColor = "lightgreen"; // Màu hồng xanh sáng, bạn có thể thay đổi thành màu khác
-                     resultDiv.style.color = "black";
+                        // Thay đổi kích thước chữ
+                        resultDiv.style.fontSize = "23px";
+                        resultDiv.style.fontFamily = "Arial, sans-serif";
 
-                     // Thay đổi kích thước chữ
-                     resultDiv.style.fontSize = "20px";
-                    // Thực hiện các thay đổi giao diện người dùng dựa trên kết quả nếu cần
-                }
-            };
 
-            xhttp.open("POST", "/get_script", true);
-            xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                        //Hiển thị ảnh
+                        var outputImage=document.getElementById("outputImage");
+                        outputImage.src= "/static/images/fpt.jpg";
+                        outputImage.style.display= "block";
+                        //thay đổi kích thước ảnh
+                        // outputImage.style.width= "100px"
+                        // outputImage.style.height= "300px"
 
-            var data = "name=" + encodeURIComponent(className);
-            xhttp.send(data);
-              // Thay đổi màu nền và màu chữ của nút button
-              var submitButton = document.getElementById("submitButton");
-            submitButton.style.backgroundColor = "lightgreen"; 
-            submitButton.style.color = "white"; // Thay đổi màu chữ
-        }
-    </script>
+
+                        // Thực hiện các thay đổi giao diện người dùng dựa trên kết quả nếu cần
+
+
+                    }
+                };
+
+                xhttp.open("POST", "/get_script", true);
+                xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+                var data = "name=" + encodeURIComponent(className);
+                xhttp.send(data);
+                // Thay đổi màu nền và màu chữ của nút button
+                var submitButton = document.getElementById("submitButton");
+                submitButton.style.backgroundColor = "lightgreen"; 
+                submitButton.style.color = "white"; // Thay đổi màu chữ
+            }
+        </script>
         </div>
     </header>
     <main>

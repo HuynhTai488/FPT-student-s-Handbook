@@ -103,10 +103,6 @@ def home():
 def introduce():
     return render_template('Gioithieu.html')
 
-#Route camera chụp hình
-@app.route('/camera', methods=['POST','GET'])
-def camera():
-    return render_template('camera.html')
 
 #Route tìm kiếm thông tin từ class name
 class Object:
@@ -125,6 +121,15 @@ def handle_script_request():
         return render_template("search.html", name=name)
     return "Đối tượng bạn tìm kiếm không có hoặc hãy nhập lại đối tượng cần tìm kiếm với kí tự như 'Cây Trang Son' "
 
+#Route News 
+@app.route('/News', methods=["POST","GET"])
+def show_news():
+    return render_template('News.html')
+
+#Route History của trường FPT
+@app.route('/history', methods=["POSt","GET"])
+def history():
+    return render_template('historyFPT.html')
 
 #Route process image
 @app.route('/upload', methods=["POST"])
@@ -195,7 +200,7 @@ def upload_video():
             return Response(generate_frames('./static/video.mp4'), mimetype='multipart/x-mixed-replace; boundary=frame')
     return render_template('client_video.html')
 
-#Route mở cmaera quay video
+#Route mở cmaera quay video và chụp 
 @app.route('/use_video', methods= ['POST','GET'])
 def use_video():
     return render_template('Cam.html')

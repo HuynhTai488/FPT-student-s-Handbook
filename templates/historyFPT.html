@@ -194,58 +194,15 @@
             background: rgba(0, 0, 0, 0.699);
             font-size: 170%;
         }
-        
-        .div-form {
-            text-align: center;
-            margin-top: 20px;
-            padding-top : 20px;
-            padding-bottom: 200px;
-        }
-        h3 {
-            font-size: 20px;
-            color : yellow;
-        }
-        .container{
-            height: 100%;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-          
-          .file-drop-area {
-            position: relative;
-            display: flex;
-            align-items: center;
-            width: 350px;
-            max-width: 100%;
-            padding: 25px;
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 10px 20px rgba(0,0,0,.1);
-            transition: .3s;
-          }
-          .file-drop-area.is-active {
-            background-color: #1a1a1a;
-          }  
-          #submit-btn{
-            margin-top: 45px;
-            height: 60px;
-            width: 13%;
-            border-radius: 21px;
-            background: green;
-            color: white;
-          }
     </style>
 </head>
 <body>
     <header>
         <div class="logo_4">    
-            <img src="{{ url_for('static', filename='images/logo web-modified.png') }}" alt="Logo">>
-            <div class="header-content">
-                <h1 style="background-color: #131921;">SỔ TAY SINH VIÊN ĐIỆN TỬ</h1>
-            </div>
+            <img src="{{ url_for('static', filename='images/logo web-modified.png') }}" alt="Logo">
+        </div>
+        <h3>SỔ TAY SINH VIÊN ĐIỆN TỬ</h3>
+        <div>
             <div id="header_2">
                 <nav class="container">
                     <a href="" id="logo">
@@ -274,22 +231,52 @@
         </div>
     </header>
     <div class="container_1">
-        <div class="div-form">
-            <form method="post" action="/video" enctype="multipart/form-data" id="upload-form">
-                <h2 style="color: white;">UPLOAD VIDEO</h3>
-                <div class="container">
-                <div class="file-drop-area">
-                <form action="/video" method="post" enctype="multipart/form-data">
-                <input type="file" name="video">
-            </div>
-        </div>
-        <div>
-            <input id="submit-btn" type="submit" value="Upload and Process">
-        </div>
-            </form>
+        <h2>Introduce FPT University</h2>
+        <p> -Ngày 20/12/2019, FPT chính thức khởi công xây dựng phân hiệu trường Đại học FPT tại Bình Định với định hướng đào tạo chuyên sâu về Trí tuệ nhân tạo.
+            <br>
+            -Công trình nằm trong dự án Tổ hợp giáo dục – trí tuệ nhân tạo quy mô lớn của FPT tại địa phương này. Đây là nơi cung cấp nguồn nhân lực chất lượng cao, đặc biệt là nhân lực AI giàu kinh nghiệm và kỹ năng cho tỉnh Bình Định nói riêng và Việt Nam nói chung. Trường đào tạo các cấp đại học, sau đại học, cung cấp các dịch vụ hỗ trợ giáo dục và nghiên cứu khoa học, đáp ứng nhu cầu học tập, rèn luyện của khoảng 5.200 sinh viên.
+            <br>
+            -Công trình được hoàn thành 2021 và được xây dựng trên khu đất rộng 5,7 ha trong quy hoạch dự án Khu đô thị mới An Phú Thịnh (thuộc phường Đống Đa và phường Nhơn Bình), Thành phố Quy Nhơn, tỉnh Bình Định với tổng vốn đầu tư gần 694 tỷ đồng.
+             <br>
+            -Thiết kế công trình do công ty kiến trúc Huni (Pháp) thực hiện, lấy cảm hứng từ các bo mạch điện tử - một hình ảnh đậm chất công nghệ, đồng thời các khối công trình cũng được sắp xếp dựa trên sự tối ưu công năng và không gian sử dụng.
+             <br>
+            -Đây là một phần trong dự án đầu tư Tổ hợp giáo dục – Trí tuệ nhân tạo của FPT, nằm trong 
 
-            <h1 style="color: red;" hidden >test</h1>
-            <h2 style="color: red;" hidden>test2</h2>
+            quy hoạch khu đô thị khoa học và trung tâm AI trọng điểm của tỉnh Bình Định. Cho tới nay, FPT là công ty công nghệ của Việt Nam đầu tư xây dựng các Tổ hợp Đại học và công viên phần mềm quy mô lớn tại 4 vùng kinh tế trọng điểm của quốc gia gồm Hà Nội, Đà Nẵng, TP. HCM, Cần Thơ. Đây sẽ là Khu tổ hợp công nghệ - Giáo dục lớn thứ 5 của FPT trên cả nước.
+            <br>
+        </p>
+        <script>
+            function addVideo() {
+                var container = document.querySelector('.container_1');
+                
+                var videoDiv = document.createElement('div');
+                videoDiv.innerHTML = '<h2>FPT Quy Nhơn University Video</h2>' +
+                                     '<video width="640" height="360" controls>' +
+                                     '<source src="/static/TruongFPT.mp4" type="video/mp4">' +
+                                     'Your browser does not support the video tag.' +
+                                     '</video>';
+        
+                container.appendChild(videoDiv);
+            }
+        </script>
+        <script>
+            function addImage() {
+                var container = document.querySelector('.container_1');
+                
+                var imageDiv = document.createElement('div');
+                imageDiv.innerHTML = '<h2>FPT Quy Nhơn University Map</h2>' +
+                                     '<img src="/static/images/Map.png" alt="Map Image">';
+        
+                container.appendChild(imageDiv);
+            }
+        </script>
+        </p>
     </div>
+    
+    <script>
+        addVideo();
+        addImage();
+    </script>
+      
 </body>
 </html>
